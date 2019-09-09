@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teste/screens/signup_screen.dart';
 // import 'package:flutter/semantics.dart';
 
 class HomeTab extends StatelessWidget {
@@ -31,7 +32,11 @@ class HomeTab extends StatelessWidget {
             ),
             textColor: Colors.black,
             color: Theme.of(context).primaryColor,
-            onPressed: (){},
+            onPressed: (){
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context)=>SignUpScreen())
+              );
+            },
           )
           )
         ],
