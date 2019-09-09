@@ -26,10 +26,11 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(height: 16.0,),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: "CPF"
+                  hintText: "CPF",
                 ),
+                keyboardType: TextInputType.number,
                 validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                  if(text.isEmpty) return "CPF Inválido";
                 },
               ),
               SizedBox(height: 16.0,),
