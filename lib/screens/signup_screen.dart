@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/material/dropdown.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -6,7 +7,27 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+ var selectedType; 
  final _formKey = GlobalKey<FormState>();
+ List<String> _sexyType = <String> [
+      'Masculino',
+      'Feminino',
+ ];
+ List<String> _maritalStatus = <String> [
+      'Solteiro(a)',
+      'Casado(a)',
+      'Amaziado(a)',
+      'Divorciado(a)',
+      'Viúvo(a)',
+ ];
+ List<String> _physicalDisability = <String> [
+      'Não',
+      'Física',
+      'Auditiva',
+      'Visual',
+      'Mental',
+      'Múltipla',
+ ];
 
   @override
   Widget build(BuildContext context) {
@@ -83,60 +104,70 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Sexo"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
+              Row(
+                  children: <Widget>[
+                    DropdownButton(
+                      items: _sexyType.map((value) => DropdownMenuItem(
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        value: value,
+                        )).toList(),
+                        onChanged: (selectedAccountType) {
+                          setState(() {
+                           selectedType = selectedAccountType; 
+                          });
+                        },
+                        value: selectedType,
+                        isExpanded: false,
+                        hint: Text("Sexo"),
+                     ),
+                  ],
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Estado Civil"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
+              Row(
+                  children: <Widget>[
+                    DropdownButton(
+                      items: _maritalStatus.map((value) => DropdownMenuItem(
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        value: value,
+                        )).toList(),
+                        onChanged: (selectedAccountType) {
+                          setState(() {
+                           selectedType = selectedAccountType; 
+                          });
+                        },
+                        value: selectedType,
+                        isExpanded: false,
+                        hint: Text("Estado Civil"),
+                     ),
+                  ],
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Data de Nascimento"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
-              ),
-              SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Possui alguma deficiência?"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
-              ),
-              SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "E-mail"
-                ),
-                keyboardType: TextInputType.emailAddress,
-                validator: (text){
-                  if(text.isEmpty || !text.contains("@")) return "E-mail Inválido!";
-                },
-              ),
-              SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Senha"
-                ),
-                obscureText: true,
-                validator: (text){
-                  if(text.isEmpty || text.length < 6) return "Senha Inválida!";
-                },
+              Row(
+                  children: <Widget>[
+                    DropdownButton(
+                      items: _physicalDisability.map((value) => DropdownMenuItem(
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        value: value,
+                        )).toList(),
+                        onChanged: (selectedAccountType) {
+                          setState(() {
+                           selectedType = selectedAccountType; 
+                          });
+                        },
+                        value: selectedType,
+                        isExpanded: false,
+                        hint: Text("Possui Alguma Deficiência?"),
+                     ),
+                  ],
               ),
               SizedBox(height: 16.0,),
               SizedBox(
@@ -157,7 +188,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               )
             ],
-            // physics: new ClampingScrollPhysics(),
           ),
         ),
     );
