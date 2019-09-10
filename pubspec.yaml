@@ -28,6 +28,8 @@ dependencies:
   transparent_image: ^1.0.0
   scoped_model: ^1.0.1
   circle_wheel_scroll: ^0.0.1+1
+  path_provider: ^0.4.1
+  url_launcher: ^3.0.3
   
 
 dev_dependencies:

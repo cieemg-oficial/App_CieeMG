@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
 
-  final _formKey = GlobalKey<FormState>();
+class _SignUpScreenState extends State<SignUpScreen> {
+ final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,7 @@ class SignUpScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(
+                decoration: new InputDecoration(
                   hintText: "Nome Completo"
                 ),
                 validator: (text){
@@ -153,9 +157,10 @@ class SignUpScreen extends StatelessWidget {
               ),
               )
             ],
+            // physics: new ClampingScrollPhysics(),
           ),
         ),
     );
       
 }
-}
+}  
