@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste/screens/address_screen.dart';
-import 'package:teste/screens/signup_screen.dart';
+
 
 class AcademicScreen extends StatefulWidget {
   @override

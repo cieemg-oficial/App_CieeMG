@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:teste/screens/academic_screen.dart';
 import 'package:teste/screens/signup_screen.dart';
+import 'package:teste/src/via_cep.dart';
 
 class AddressScreen extends StatefulWidget {
   @override
