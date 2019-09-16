@@ -15,6 +15,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
  var maritalType;
  var physicalType;
  final _formKey = GlobalKey<FormState>();
+ String _dropdownvalue = 'Sexo';
+ 
  List<String> _sexyType = <String> [
       'Masculino',
       'Feminino',
@@ -30,6 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       'Mental',
       'Múltipla',
  ];
+ String dropdownValue = "one";
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 decoration: InputDecoration(
                   hintText: "RG"
                 ),
+                keyboardType: TextInputType.number,
                 validator: (text){
                   if(text.isEmpty) return "Nome Inválido";
                 },
@@ -111,68 +115,81 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
               SizedBox(height: 16.0,),
-              Row(
-                  children: <Widget>[
-                    DropdownButton(
-                      items: _sexyType.map((value) => DropdownMenuItem(
-                        child: Text(
-                          value,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        value: value,
-                        )).toList(),
-                        onChanged: (selectedAccountType) {
-                          setState(() {
-                           selectedType = selectedAccountType; 
-                          });
-                        },
-                        value: selectedType,
-                        isExpanded: false,
-                        hint: Text("Sexo"),
-                     ),
-                  ],
+                // Row(
+                //     children: <Widget>[
+                // SizedBox(height: 16.0,),
+                new DropdownButtonFormField<String>(
+                hint: Text("Sexo"),
+                validator: (String value) {
+                  if(value?.isEmpty ?? true) {
+                    return 'Sexo Invalido';
+                  }
+                },
+                decoration: InputDecoration(),
+                items: _sexyType.map((value) {
+                  return DropdownMenuItem<String>(
+                    child: Text(value,
+                    style: TextStyle(color: Colors.black),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+                  onChanged: (selectedAccountType) {
+                   setState(() {
+                   selectedType = selectedAccountType;
+                  });
+                },
+                value: selectedType,
               ),
               SizedBox(height: 16.0,),
-                DropdownButton<String>(
-
-                  items: _maritalStatus.map((String dropDownStringItem) {
+                new DropdownButtonFormField<String>(
+                  hint: Text("Estado Civil"),
+                  validator: (String value){
+                    if(value?.isEmpty ?? true) {
+                      return 'Estado Civil Invalido';
+                    }
+                  },
+                  decoration: InputDecoration(),
+                  items: _maritalStatus.map((value) {
                     return DropdownMenuItem<String> (
-                      value: dropDownStringItem,
-                      child: Text(dropDownStringItem),
+                      child: Text(value,
+                      style: TextStyle(color: Colors.black),
+                      ),
+                      value: value,
                     );
                   }).toList(),
-
                   onChanged: (String selectedMaritalType) {
                     setState(() {
                      maritalType = selectedMaritalType;
                     });
                   },
                   value: maritalType,
-                  isExpanded: false,
-                  hint: Text("Estado Civil"),
                 ),
               SizedBox(height: 16.0,),
-              Row(
-                  children: <Widget>[
-                    DropdownButton(
-                      items: _physicalDisability.map((value) => DropdownMenuItem(
-                        child: Text(
-                          value,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        value: value,
-                        )).toList(),
-                        onChanged: (selectedPhysicalType) {
-                          setState(() {
-                           physicalType = selectedPhysicalType; 
-                          });
-                        },
-                        value: physicalType,
-                        isExpanded: false,
-                        hint: Text("Possui Alguma Deficiência?"),
+               new DropdownButtonFormField<String>(
+                 hint: Text("Possui Alguma Deficiência?"),
+                 validator: (String value){
+                   if(value?.isEmpty ?? true) {
+                     return 'Selecione uma Opção';
+                   }
+                 },
+                decoration: InputDecoration(),
+                   items: _physicalDisability.map((value) { 
+                    return DropdownMenuItem<String>(
+                    child: Text(
+                    value,
+                    style: TextStyle(color: Colors.black),
                      ),
-                  ],
-              ),
+                      value: value,
+                    );
+                    }).toList(),
+                      onChanged: (selectedPhysicalType) {
+                      setState(() {
+                      physicalType = selectedPhysicalType;
+                    });
+                },
+                value: physicalType,
+                ),
               SizedBox(height: 16.0,),
               TextFormField(
                 inputFormatters: [
@@ -184,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.number,
                 validator: (text){
-                  if(text.isEmpty) return "CPF Inválido";
+                  if(text.isEmpty) return "Data de Nascimento não Informada";
                 },
               ),
               SizedBox(height: 16.0,),
@@ -199,20 +216,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textColor: Colors.white,
                 color: Theme.of(context).secondaryHeaderColor,
                 onPressed: (){
-                 Navigator.of(context).pushReplacement(
-                   MaterialPageRoute(builder: (context)=>AddressScreen())
-                 );
-                  // if(_formKey.currentState.validate()) {
-
-                  // }
-                
+                  if (!_formKey.currentState.validate()) {
+                    
+                  }else(
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                  AddressScreen()
+                  )));
                 },
               ),
-              )
+              ),
+              SizedBox(height: 16.0,),
             ],
           ),
         ),
-    );
-      
+    );     
 }
 }  

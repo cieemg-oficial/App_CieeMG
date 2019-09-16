@@ -38,21 +38,23 @@ bool digito_9;
                 decoration: InputDecoration(
                   hintText: "CEP",
                 ),
+                keyboardType: TextInputType.number,
               ),
               SizedBox(height: 16.0,),
               TextFormField(
                 decoration: new InputDecoration(
                   hintText: "Logradouro"
                 ),
-                validator: (text){
-                  if(text.isEmpty) return "Logradouro Inválido";
-                },
+                // validator: (text){
+                //   if(text.isEmpty) return "Logradouro Inválido";
+                // },
               ),
               SizedBox(height: 16.0,),
               TextFormField(
                 decoration: new InputDecoration(
                   hintText: "Número"
                 ),
+                keyboardType: TextInputType.number,
                 validator: (text){
                   if(text.isEmpty) return "Número Inválido";
                 },
@@ -96,6 +98,7 @@ bool digito_9;
                   WhitelistingTextInputFormatter.digitsOnly,
                   TelefoneInputFormatter(digito_9: true,),
                 ],
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: "Telefone 1",
                 ),
@@ -106,6 +109,7 @@ bool digito_9;
                   WhitelistingTextInputFormatter.digitsOnly,
                   new TelefoneInputFormatter(digito_9: true,),
                 ],
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   hintText: "Telefone 2",
                 ),
@@ -117,7 +121,12 @@ bool digito_9;
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (text){
-                  if(text.isEmpty) return "Bairro Inválido";
+                  bool isEmail(String em) {
+                  String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  RegExp regExp = new RegExp(p);
+                  return regExp.hasMatch(em);
+                  }
+                  if(text.isEmpty || !text.contains("@")) return "E-mail Inválido";
                 },
               ),
                SizedBox(height: 16.0,),
@@ -132,38 +141,15 @@ bool digito_9;
                 textColor: Colors.white,
                 color: Theme.of(context).secondaryHeaderColor,
                 onPressed: (){
-                 Navigator.of(context).pushReplacement(
-                   MaterialPageRoute(builder: (context)=>AcademicScreen())
-                 );
-                //   // if(_formKey.currentState.validate()) {
+                  if(!_formKey.currentState.validate()){
 
-                //   // }
-                
-                // },
+                  }else(
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                  AcademicScreen()
+                  )));
                 }),
               ),
                SizedBox(height: 16.0,),
-              SizedBox(
-                height: 44.0,
-                child: MaterialButton( 
-                  child: Text("Voltar",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-                textColor: Colors.white,
-                color: Theme.of(context).secondaryHeaderColor,
-                onPressed: (){
-                 Navigator.of(context).pushReplacement(
-                   MaterialPageRoute(builder: (context)=>SignUpScreen())
-                 );
-                //   // if(_formKey.currentState.validate()) {
-
-                //   // }
-                
-                // },
-                }),
-              ),
               ],
               )
               )

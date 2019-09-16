@@ -33,9 +33,9 @@ class HomeTab extends StatelessWidget {
             textColor: Colors.black,
             color: Theme.of(context).primaryColor,
             onPressed: (){
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context)=>SignUpScreen())
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+              SignUpScreen()
+              ));
             },
           )
           )

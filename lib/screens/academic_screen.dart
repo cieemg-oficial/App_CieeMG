@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste/screens/address_screen.dart';
+import 'package:teste/tabs/home_tab.dart';
 
 
 class AcademicScreen extends StatefulWidget {
@@ -98,36 +99,12 @@ class _AcademicScreenState extends State<AcademicScreen> {
                 textColor: Colors.white,
                 color: Theme.of(context).secondaryHeaderColor,
                 onPressed: (){
-                 
-                //   // if(_formKey.currentState.validate()) {
-
-                //   // }
-                
-                // },
+                 Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                  HomeTab()
+                  ));
                 }),
               ),
                SizedBox(height: 16.0,),
-              SizedBox(
-                height: 44.0,
-                child: MaterialButton( 
-                  child: Text("Voltar",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-                textColor: Colors.white,
-                color: Theme.of(context).secondaryHeaderColor,
-                onPressed: (){
-                 Navigator.of(context).pushReplacement(
-                   MaterialPageRoute(builder: (context)=>AddressScreen())
-                 );
-                //   // if(_formKey.currentState.validate()) {
-
-                //   // }
-                
-                // },
-                }),
-              )
               ]
           )
         )
