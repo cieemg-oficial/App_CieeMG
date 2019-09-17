@@ -13,10 +13,13 @@ class _ViaCepState extends State<ViaCep> {
 
   TextEditingController controllerCep = TextEditingController();
   final myController = TextEditingController();
-  // String resultado = "Resultado";
-  String resultadoLogradouro = "Resultado Logradouro";
+  String resultado = "Resultado";
+  String resultadoLogradouro = "Logradouro";
+  String resultadoBairro = "Bairro";
+  String resultadoLocalidade = "Cidade";
+  String resultadoUf = "UF";
 
-  preencherCep() async {
+  _preencherCep() async {
 
   String cepDigitado = controllerCep.text;
   String url = "https://viacep.com.br/ws/"+ cepDigitado +"/json/";
@@ -24,13 +27,16 @@ class _ViaCepState extends State<ViaCep> {
   response = await http.get(url);
   Map<String, dynamic> retorno = json.decode(response.body);
   String logradouro = retorno["logradouro"];
-  // String bairro = retorno["bairro"];
-  // String localidade = retorno["localidade"];
-  // String uf = retorno["uf"];
+  String bairro = retorno["bairro"];
+  String localidade = retorno["localidade"];
+  String uf = retorno["uf"];
 
  setState(() {
   // resultado = "${logradouro}, ${bairro}, ${localidade}, ${uf}"; 
   resultadoLogradouro = "$logradouro";
+  resultadoBairro = "$bairro";
+  resultadoLocalidade = "$localidade";
+  resultadoUf = "$uf";
  });
 
 
@@ -49,7 +55,7 @@ class _ViaCepState extends State<ViaCep> {
   }
 
   _printLatestValue(){
-    print("$preencherCep");
+    print("$_preencherCep");
   }
   String _text = "Logradouro";
   @override
@@ -75,21 +81,52 @@ class _ViaCepState extends State<ViaCep> {
               RaisedButton(
                 child: Text("Clique aqui"),
                 onPressed: (){
-                  return preencherCep();
+                  return _preencherCep();
                   // setState(() {
                   //  resultadoLogradouro = TextEditingController() as String; 
                   // });
                 },
               ),
               SizedBox(height: 16.0,),
-              Text(resultadoLogradouro),
+              // SizedBox(height: 16.0,),
+              // TextField(
+              //   onChanged:(context) {
+              //    print(preencherCep);
+              //   }
+              // ),
+              // Text(_text),
+              Column(children: <Widget>[
               SizedBox(height: 16.0,),
-              TextField(
-                onChanged:(context) {
-                 print(preencherCep);
-                }
+                Align(
+              child: Text(resultadoLogradouro, style: TextStyle(fontSize: 20, color: Colors.black,),),
+              alignment: Alignment.centerLeft,
+              
+                )]
               ),
-              Text(_text),
+              Column(children: <Widget>[
+                Align(
+              child: Text(resultadoBairro, style: TextStyle(fontSize: 20, color: Colors.black,),),
+              alignment: Alignment.centerLeft,
+                 )
+               ]
+              ),
+              SizedBox(height: 16.0,),
+              Column(children: <Widget>[
+                Align(
+              child: Text(resultadoLocalidade, style: TextStyle(fontSize: 20, color: Colors.black,),),
+              alignment: Alignment.centerLeft,
+                 )
+               ]
+              ),
+              SizedBox(height: 16.0,),
+              Column(children: <Widget>[
+                Align(
+              child: Text(resultadoUf, style: TextStyle(fontSize: 20, color: Colors.black,),),
+              alignment: Alignment.centerLeft,
+                 )
+               ]
+              ),
+              SizedBox(height: 16.0,),
             ],
           ),
         ),

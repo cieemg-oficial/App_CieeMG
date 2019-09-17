@@ -45,12 +45,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: ListView(
             padding: EdgeInsets.all(16.0),
             children: <Widget>[
-              TextFormField(
+              new TextFormField(
                 decoration: new InputDecoration(
                   hintText: "Nome Completo"
                 ),
                 validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                  if(text.isEmpty) return "Nome é Obrigatorio";
                 },
               ),
               SizedBox(height: 16.0,),
@@ -64,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.number,
                 validator: (text){
-                  if(text.isEmpty) return "CPF Inválido";
+                  if(text.isEmpty) return "CPF é Obrigatorio";
                 },
               ),
               SizedBox(height: 16.0,),
@@ -74,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 keyboardType: TextInputType.number,
                 validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                  if(text.isEmpty) return "RG é Obrigatorio";
                 },
               ),
               SizedBox(height: 16.0,),
@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText: "Orgão Expedidor"
                 ),
                 validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                  if(text.isEmpty) return "Orgão Expedidor é Obrigatorio";
                 },
               ),
               SizedBox(height: 16.0,),
@@ -92,18 +92,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText: "Carteira de Trabalho"
                 ),
                 keyboardType: TextInputType.number,
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
               ),
               SizedBox(height: 16.0,),
               TextFormField(
                 decoration: InputDecoration(
                   hintText: "Nome do Pai"
                 ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
-                },
               ),
               SizedBox(height: 16.0,),
               TextFormField(
@@ -111,18 +105,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hintText: "Nome da Mãe"
                 ),
                 validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                  if(text.isEmpty) return "Nome da Mãe é Obrigatorio";
                 },
               ),
               SizedBox(height: 16.0,),
-                // Row(
-                //     children: <Widget>[
-                // SizedBox(height: 16.0,),
+                new TextFormField(
+                  inputFormatters: [
+                    WhitelistingTextInputFormatter.digitsOnly,
+                    DataInputFormatter(),
+                  ],
+                  decoration: InputDecoration(
+                    hintText: "Data de Nascimento",
+                  ),
+                  keyboardType: TextInputType.number,
+                  validator: (text){
+                    if(text.isEmpty) return "Data de Nascimento é Obrigatoria";
+                  },
+                ),
+                SizedBox(height: 16.0,),
                 new DropdownButtonFormField<String>(
                 hint: Text("Sexo"),
                 validator: (String value) {
                   if(value?.isEmpty ?? true) {
-                    return 'Sexo Invalido';
+                    return 'Sexo é Obrigatorio';
                   }
                 },
                 decoration: InputDecoration(),
@@ -146,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   hint: Text("Estado Civil"),
                   validator: (String value){
                     if(value?.isEmpty ?? true) {
-                      return 'Estado Civil Invalido';
+                      return 'Estado Civil é Obrigatorio';
                     }
                   },
                   decoration: InputDecoration(),
@@ -191,20 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 value: physicalType,
                 ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                inputFormatters: [
-                  WhitelistingTextInputFormatter.digitsOnly,
-                  DataInputFormatter(),
-                ],
-                decoration: InputDecoration(
-                  hintText: "Data de Nascimento",
-                ),
-                keyboardType: TextInputType.number,
-                validator: (text){
-                  if(text.isEmpty) return "Data de Nascimento não Informada";
-                },
-              ),
-              SizedBox(height: 16.0,),
+              
               SizedBox(
                 height: 44.0,
                 child: RaisedButton(

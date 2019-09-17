@@ -9,9 +9,27 @@ class AcademicScreen extends StatefulWidget {
 }
 
 class _AcademicScreenState extends State<AcademicScreen> {
+  var semesterType;
+  var scheduleType;
+  var periodtype;
   final _formKey = GlobalKey<FormState>();
 
-
+  List<String> _schoolSemester = <String> [
+    '1', 
+    '2',
+    'Estágio Curricular',
+  ];
+  List<String> _studySchedule = <String> [
+    'Manhã',
+    'Tarde',
+    'Noite',
+    'Estágio Curricular',
+    'EAD',
+    'Formado',
+  ];
+  List<String> _pediodSchool = <String> [
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'Estágio Curricular',
+  ];
 
 
   @override
@@ -44,48 +62,99 @@ class _AcademicScreenState extends State<AcademicScreen> {
               ),
               SizedBox(height: 16.0,),
               TextFormField(
+                maxLength: 4,
                 decoration: new InputDecoration(
                   hintText: "Ano de formatura"
                 ),
+                keyboardType: TextInputType.number,
                 validator: (text){
                   if(text.isEmpty) return "Nome Inválido";
                 },
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: new InputDecoration(
-                  hintText: "Semestre de formatura"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+              new DropdownButtonFormField<String>(
+                hint: Text("Semestre de Formatura"),
+                validator: (String value){
+                  if(value?.isEmpty ?? true) {
+                    return 'Semestre é Obrigatorio';
+                  }
                 },
+                decoration: InputDecoration(),
+                items: _schoolSemester.map((value) {
+                  return DropdownMenuItem<String>(
+                    child: Text(
+                      value,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (selectSemesterType) {
+                  setState(() {
+                   semesterType = selectSemesterType; 
+                  });
+                },
+                value: semesterType,
               ),
               SizedBox(height: 16.0,),
               TextFormField(
                 decoration: new InputDecoration(
                   hintText: "Mês da formatura"
                 ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+                keyboardType: TextInputType.number,
+                validator: (value){
+                  if(value.length == 0 || double.parse(value) >= 13 || double.parse(value) <= 0) return "Mês Inválido";
                 },
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: new InputDecoration(
-                  hintText: "Periodo/Ano/Ciclo/Módulo"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+              new DropdownButtonFormField<String>(
+                hint: Text("Periodo/Ano/Ciclo/Módulo"),
+                validator: (String value) {
+                  if(value?.isEmpty ?? true) {
+                    return 'Periodo é Obrigatorio';
+                  }
                 },
+                decoration: InputDecoration(),
+                items: _pediodSchool.map((value) {
+                  return DropdownMenuItem<String>(
+                    child: Text(
+                      value,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (selectPeriodType) {
+                  setState(() {
+                   periodtype = selectPeriodType; 
+                  });
+                },
+                value: periodtype,
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: new InputDecoration(
-                  hintText: "Horário de Estudo"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Nome Inválido";
+              new DropdownButtonFormField<String>(
+                hint: Text("Horário de Estudo"),
+                validator: (String value){
+                  if(value?.isEmpty ?? true) {
+                    return 'Horário Obrigatorio';
+                  }
                 },
+                decoration: InputDecoration(),
+                items: _studySchedule.map((value) {
+                  return DropdownMenuItem<String>(
+                    child: Text(
+                      value,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (selectScheduleType){
+                  setState(() {
+                   scheduleType = selectScheduleType; 
+                  });
+                },
+                value: scheduleType,
               ),
               SizedBox(height: 16.0,),
               SizedBox(
@@ -99,9 +168,13 @@ class _AcademicScreenState extends State<AcademicScreen> {
                 textColor: Colors.white,
                 color: Theme.of(context).secondaryHeaderColor,
                 onPressed: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                  HomeTab()
-                  ));
+                  if(!_formKey.currentState.validate()) {
+
+                  }else(
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    HomeTab()
+
+                  )));
                 }),
               ),
                SizedBox(height: 16.0,),
