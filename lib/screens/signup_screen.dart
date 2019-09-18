@@ -14,6 +14,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
  var selectedType;
  var maritalType;
  var physicalType;
+ var expedidorType;
  final _formKey = GlobalKey<FormState>();
  String _dropdownvalue = 'Sexo';
  
@@ -32,6 +33,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       'Mental',
       'Múltipla',
  ];
+ List<String> _orgaoExpedidor = <String> [
+  'SSP', 'Polícia Civil', 'Outros',
+];
  String dropdownValue = "one";
 
   @override
@@ -78,13 +82,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
               SizedBox(height: 16.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Orgão Expedidor"
-                ),
-                validator: (text){
-                  if(text.isEmpty) return "Orgão Expedidor é Obrigatorio";
+              new DropdownButtonFormField<String>(
+                hint: Text("Orgão Expedidor"),
+                validator: (String value) {
+                  if(value?.isEmpty ?? true) {
+                    return 'Orgão Expedidor é Obrigatorio';
+                  }
                 },
+                decoration: InputDecoration(),
+                items: _orgaoExpedidor.map((value) {
+                  return DropdownMenuItem<String> (
+                    child: Text(
+                      value,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    value: value,
+                  );
+                }).toList(),
+                onChanged: (String selectedOrgaoExpedidor) {
+                  setState(() {
+                   expedidorType = selectedOrgaoExpedidor; 
+                  });
+                },
+                value: expedidorType,
               ),
               SizedBox(height: 16.0,),
               TextFormField(

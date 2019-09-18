@@ -32,7 +32,6 @@ class _ViaCepState extends State<ViaCep> {
   String uf = retorno["uf"];
 
  setState(() {
-  // resultado = "${logradouro}, ${bairro}, ${localidade}, ${uf}"; 
   resultadoLogradouro = "$logradouro";
   resultadoBairro = "$bairro";
   resultadoLocalidade = "$localidade";
@@ -57,7 +56,6 @@ class _ViaCepState extends State<ViaCep> {
   _printLatestValue(){
     print("$_preencherCep");
   }
-  String _text = "Logradouro";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,43 +64,34 @@ class _ViaCepState extends State<ViaCep> {
         ) ,
         body: Form(
           key: _formKey,
-           child: Column(
+           child: ListView(
             children: <Widget>[
-              TextField(
+              TextFormField(
                 keyboardType: TextInputType.number,
+                
                 decoration: InputDecoration(
-                  labelText: "Digite o Cep"
+                  hintText: "Digite o Cep",
+                  filled: true,
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search, color: Colors.grey, size: 28.0,),
+                    onPressed: (){
+                      return _preencherCep();
+                    },
+                  )
                 ),
                 style: TextStyle(
                   fontSize: 20
                 ),
                 controller: controllerCep,
               ),
-              RaisedButton(
-                child: Text("Clique aqui"),
-                onPressed: (){
-                  return _preencherCep();
-                  // setState(() {
-                  //  resultadoLogradouro = TextEditingController() as String; 
-                  // });
-                },
-              ),
               SizedBox(height: 16.0,),
-              // SizedBox(height: 16.0,),
-              // TextField(
-              //   onChanged:(context) {
-              //    print(preencherCep);
-              //   }
-              // ),
-              // Text(_text),
               Column(children: <Widget>[
-              SizedBox(height: 16.0,),
                 Align(
               child: Text(resultadoLogradouro, style: TextStyle(fontSize: 20, color: Colors.black,),),
               alignment: Alignment.centerLeft,
-              
                 )]
               ),
+              SizedBox(height: 16.0,),
               Column(children: <Widget>[
                 Align(
               child: Text(resultadoBairro, style: TextStyle(fontSize: 20, color: Colors.black,),),
@@ -123,14 +112,13 @@ class _ViaCepState extends State<ViaCep> {
                 Align(
               child: Text(resultadoUf, style: TextStyle(fontSize: 20, color: Colors.black,),),
               alignment: Alignment.centerLeft,
-                 )
+                 ),
                ]
               ),
               SizedBox(height: 16.0,),
             ],
           ),
         ),
-      
     );
   }
 }
