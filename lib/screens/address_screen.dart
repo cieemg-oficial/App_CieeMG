@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:brasil_fields/formatter/telefone_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +18,7 @@ class AddressScreen extends StatefulWidget {
 
 class _AddressScreenState extends State<AddressScreen> {
 final _formKey = GlobalKey<FormState>();
+  
 var passKey = GlobalKey<FormFieldState>();
 
 
@@ -28,23 +31,22 @@ bool digito_9;
   String resultadoBairro = "Bairro";
   String resultadoLocalidade = "Cidade";
   String resultadoUf = "UF";
+ 
 
   _preencherCep() async {
-
   String cepDigitado = controllerCep.text;
-  String url = "https://viacep.com.br/ws/"+ cepDigitado +"/json/";
+  String url = "https://api.cieemg.org.br:9000/cep/"+ cepDigitado;
   http.Response response;
   response = await http.get(url);
   Map<String, dynamic> retorno = json.decode(response.body);
   String logradouro = retorno["logradouro"];
   String bairro = retorno["bairro"];
-  String localidade = retorno["localidade"];
+  String cidade = retorno["cidade"];
   String uf = retorno["uf"];
-
  setState(() {
   resultadoLogradouro = "$logradouro";
   resultadoBairro = "$bairro";
-  resultadoLocalidade = "$localidade";
+  resultadoLocalidade = "$cidade";
   resultadoUf = "$uf";
  });
 }

@@ -10,6 +10,9 @@ import 'package:teste/tabs/home_tab.dart';
 
 // import 'package:teste/screens/signup_screen.dart';
 void main() => runApp(new MyApp());
+class Urls {
+  static const BASE_API_URL = "https://api.cieemg.org.br:9000";
+}
 
 class MyApp extends StatelessWidget{
 
@@ -25,7 +28,7 @@ Widget build(BuildContext context) {
       secondaryHeaderColor: Colors.green,
     ),
     debugShowCheckedModeBanner: false,
-    home: AcademicScreen(),
+    home: AddressScreen(),
       )  
     );
   }

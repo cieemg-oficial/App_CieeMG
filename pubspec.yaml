@@ -33,6 +33,7 @@ dependencies:
   http: ^0.12.0+1
   brasil_fields: ^0.0.7+2
   validators: ^2.0.0
+  jaguar_cors: ^2.4.4
   
 
 dev_dependencies:
