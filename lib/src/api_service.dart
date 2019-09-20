@@ -1,19 +1,19 @@
-import 'dart:convert';
+//import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import '../main.dart';
+//import 'package:http/http.dart' as http;
+// '../main.dart';
 
-class ApiService {
-  static Future <List<dynamic>> getPostList() async {
-    try{
-    final response = await http.get('$Urls.BASE_API_URL/estudante');
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      return null;
-    } 
-  }catch (ex) {
-    return null;
-  }
-}
-}
+//class ApiService {
+  //static Future <List<dynamic>> getPostList() async {
+   // try{
+   // final response = await http.get('$Urls.BASE_API_URL/estudante');
+   // if (response.statusCode == 200) {
+   //   return json.decode(response.body);
+   // } else {
+   //   return null;
+   // }
+  //}catch (ex) {
+ //   return null;
+ // }
+//}
+//}

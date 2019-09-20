@@ -35,9 +35,9 @@ bool digito_9;
 
   _preencherCep() async {
   String cepDigitado = controllerCep.text;
-  String url = "https://api.cieemg.org.br:9000/cep/"+ cepDigitado;
+  String Uri = "https://api.cieemg.org.br:9000/cep/"+ cepDigitado;
   http.Response response;
-  response = await http.get(url);
+  response = await http.get(Uri);
   Map<String, dynamic> retorno = json.decode(response.body);
   String logradouro = retorno["logradouro"];
   String bairro = retorno["bairro"];
