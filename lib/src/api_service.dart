@@ -6,7 +6,7 @@
 //class ApiService {
   //static Future <List<dynamic>> getPostList() async {
    // try{
-   // final response = await http.get('$Urls.BASE_API_URL/estudante');
+   // final response = await http.get('$Urls.BASE_API_URL/estudantes');
    // if (response.statusCode == 200) {
    //   return json.decode(response.body);
    // } else {

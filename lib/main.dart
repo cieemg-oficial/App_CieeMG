@@ -11,7 +11,7 @@ import 'package:teste/tabs/home_tab.dart';
 // import 'package:teste/screens/signup_screen.dart';
 void main() => runApp(new MyApp());
 class Urls {
-  static const BASE_API_URL = "https://api.cieemg.org.br:9000";
+  static const CREATE_POST_URL = "http://10.0.2.2:5000/estudantes";
 }
 
 class MyApp extends StatelessWidget{
