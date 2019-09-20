@@ -1,3 +1,5 @@
+
+import 'dart:core';
 import 'dart:io';
 
 import 'package:brasil_fields/formatter/telefone_input_formatter.dart';
@@ -27,27 +29,33 @@ bool digito_9;
   TextEditingController controllerCep = TextEditingController();
   final myController = TextEditingController();
   String resultado = "Resultado";
+  String resultadoId = "Id";
   String resultadoLogradouro = "Logradouro";
   String resultadoBairro = "Bairro";
-  String resultadoLocalidade = "Cidade";
+  String resultadoCidade = "Cidade";
   String resultadoUf = "UF";
+  String resultadoRegiao = "Região";
  
 
   _preencherCep() async {
   String cepDigitado = controllerCep.text;
-  String Uri = "https://api.cieemg.org.br:9000/cep/"+ cepDigitado;
+  String url = "http://10.0.2.2:5000/cep/"+ cepDigitado;
   http.Response response;
-  response = await http.get(Uri);
+  response = await http.get(url);
   Map<String, dynamic> retorno = json.decode(response.body);
+  int id = retorno ["id"];
   String logradouro = retorno["logradouro"];
   String bairro = retorno["bairro"];
   String cidade = retorno["cidade"];
   String uf = retorno["uf"];
+  String regiao = retorno["regiao"];
  setState(() {
+  resultadoId = "$id";
   resultadoLogradouro = "$logradouro";
   resultadoBairro = "$bairro";
-  resultadoLocalidade = "$cidade";
+  resultadoCidade = "$cidade";
   resultadoUf = "$uf";
+  resultadoRegiao = "$regiao";
  });
 }
 
@@ -90,10 +98,13 @@ bool digito_9;
                     onPressed: () async{
                       return await  _preencherCep();
                     },
-                  )
+                  ),
                 ),
                 keyboardType: TextInputType.number,
                 controller: controllerCep,
+                validator: (text) {
+                  if(text.isEmpty) return "CEP é Obrigatorio";
+                }
               ),
               SizedBox(height: 16.0,),
               Column(children: <Widget>[
@@ -129,7 +140,7 @@ bool digito_9;
               SizedBox(height: 16.0,),
               Column(children: <Widget>[
                 Align(
-              child: Text(resultadoLocalidade, style: TextStyle(fontSize: 16, color: Colors.black,),),
+              child: Text(resultadoCidade, style: TextStyle(fontSize: 16, color: Colors.black,),),
               alignment: Alignment.centerLeft,
                  )
                ]
